@@ -1,42 +1,19 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 
 <!DOCTYPE html>
 <html>
+
+<head>
+
 <style>
-.container1  {
-  background-color:grey;
-  padding-top: 20px;
-  margin-left: 50 px;
-  margin-right 50px;
-  font-family: 'Indie Flower'; 
-  font-weight: 400;
-  
-  }
-  
-
-#container2 {
-  background-color:lightblue;
-  border:dotted;
-  margin: 10 40 20 40;
-
-
-}
-
-.text1{
-  font-size:24;
-  padding: 20 80 20 80;  
-}
-
-
-#container41{
-  padding: 20 80 20 80;  
-}
-
-
 #bg{
-background: url("graphPaper.jpg"); 
+/*background: url("graphPaper.jpg");   */
+background-color:white;
 background-size: 100% 100%;
 background-repeat: no-repeat;
 background-attachment: fixed;
@@ -47,97 +24,182 @@ min-width:100%;
 min-height:100%;
 }
 
-.circleImg{
-
-border-color: purple;
-border-width: 5px;
-border-style: solid;
-border-radius: 50%;
-width:200px;
-height:200px;
-margin-left:auto;
-margin-right:auto;
-
+p{
+font-family:"Indie Flower";
+font-size:26;
+margin: 0 60 60 10;
 }
 
+.navbar{
+  margin-bottom:0;
+  border-radius:0;
+}
+
+footer{
+  background-color: black;
+  color:gray;
+}
+
+.mainSection{
+  background-color:white;
+}
+
+.profilePic{
+  border-color: purple;
+  border-width: 5px;
+  border-style: solid;
+  border-radius:50%;
+  width:250px;
+  height:250px;
+}
+
+
+.odd{
+  margin:20 0 20 0;
+  padding: 10 0 10 0;
+}
+
+.even{
+  background-color:gray;
+  margin: 20 0 20 0;
+  padding: 10 0 10 0;
+}
+
+
+.social{
+margin:0;
+padding:0;
+}
+.social ul{
+margin:0;
+padding:5px;
+}
+
+.social ul li{
+margin:5px;
+list-style: none outside none;
+display: inline-block;
+}
 </style>
+</head>
+
+<!--End of head-->
 
 
-<div class="container-fluid container1" id="bg">
-
-<!-- Container block 2 -->  
-  <div id="container2">
-    Header... more to be added.
-    
-  </div>
- 
-<!-- Container block 3 -->  
-  <div class="text1">
-    This is a testing page. I plan to put visualization projects and food pictures up here.
-    </br>
-    <b><center> ----------------------------------------- </center></b>
-    
-    <center><img class="img-responsive circleImg" src="rose.jpg" alt="Roses"></center>
-    </br>
-    <b><center> ----------------------------------------- </center></b>
-
-  </div> 
-
-
-<!-- Container block 4 -->  
-  <div id="container4">
-    <div class="text1">
-      <h2> Projects </h2> 
-      <ul>
-        <li> Poems Project </li>
-        <li> Movie Sentiment </li>
-        <li> Math Funny Fraction</li>
-        <li> Math not-boring Fraction </li>
-        
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+    <!--Not sure how this section works-->
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<!--        <span class="icon-bar"></span>    -->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><b>JL</b></a>  
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+<!--        <li><a href="#"> About </a></li>  -->
+        <li><a href="#"> Projects </a></li>
+        <li><a href="#"> Pictures </a></li>
       </ul>
-      Details coming soon...
-      </br>
-      <b><center> ----------------------------------------- </center></b>
-
     </div>
   </div>
+</nav>
 
-
-
-<!-- Container block 5 -->  
-  <div>
-    <div class="text1">
-      <h2> Pictures </h2>
-      Details coming soon...
-      <b><center> ----------------------------------------- </center></b>
-
-    </div>
+<div class="mainSection odd">
+  <div class="container text-center">
+    <p> Hi All. My name is Jianyu Li. This is where I keep my personal projects and other stuffs. </p>
+    <a href="#">
+      <center><img class="img-responsive profilePic" src="rose.jpg"></center>
+    </a>
   </div>
-  
-  
-   <div class="text1">
-  <h2> About</h2>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6">
-          <a href="https://www.facebook.com/jian.y.li.7"> <i class="fa fa-facebook" aria-hidden="true">Facebook</i></a>
-        </div>
-        
-        <div class="col-sm-6">
-          <a href="https://github.com/Crolabear/foodzNthingz"> <i class="fa fa-facebook" aria-hidden="true"></i>Github</a>
-
-        </div>
-      </div>
-    </div>
-  <!--The bootstrap grid doesn't work. dont know why-->
-    updated on April-2016
-
-  
-  </div>
-
-<!--   close div    -->
 </div>
 
+
+<!--section 2-->
+<div class="container-fluid text-center even">
+  <h3> Projects </h3>
+  <div class="row">
+  
+    <div class="col-sm-3">
+      <p> Poem project </p>
+      More details coming soon...
+    
+    </div>
+    
+    <div class="col-sm-3">
+      <p> the Funny Fraction </p>
+        More details coming soon...
+
+    </div>
+    
+    <div class="col-sm-3">
+      <p> not-boring fraction </p>
+          More details coming soon...
+
+    </div>
+    
+    <div class="col-sm-3">
+      <p> movie sentiment </p>
+          More details coming soon...
+
+    </div>
+  </div>
+</div>
+    
+<div class="container-fluid text-center odd">
+  <h3> Pictures </h3>
+  <div class="row">
+  
+    <div class="col-sm-3">
+      <p> Picture 1 </p>
+      More details coming soon...
+    
+    </div>
+    
+    <div class="col-sm-3">
+      <p> Picture 2 </p>
+        More details coming soon...
+
+    </div>
+    
+    <div class="col-sm-3">
+      <p> Picture 3 </p>
+          More details coming soon...
+
+    </div>
+    
+    <div class="col-sm-3">
+      <p> Picture 4 </p>
+          More details coming soon...
+
+    </div>
+  </div>  
+</div>
+<!--Section 3-->
+<footer class="container-fluid text-center">
+  <div class="row"> 
+    <div class="col-sm-6">
+      Jianyu Li
+      </br>
+      April - 2016
+    </div>
+    
+    <div class="col-sm-6 social">
+    <ul>
+      <li><a href="#"><i class="fa fa-2x fa-github" style="color:white"></i></a></li>
+      <li><a href="#"><i class="fa fa-2x fa-facebook" style="color:white"></i></a></li>
+      <li><a href="#"><i class="fa fa-2x fa-linkedin" style="color:white"></i></a></li>
+    </ul>
+    
+    </div>    
+  </div>
+  
+</footer>
+</body>
 
 
 
