@@ -1,0 +1,103 @@
+
+.d3-tip {
+  position: absolute;
+  background-color: rgba(255,255,255,1);
+  padding: 10px;
+  border: 1px solid #ddd;
+
+  font-family: Arial;
+  font-size: 13px;
+  
+  
+  transition: opacity 500ms linear;
+  -moz-transition: opacity 500ms linear;
+  -webkit-transition: opacity 500ms linear;
+  
+  -moz-box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+  -webkit-box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+  box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  
+}
+
+.fig1 {
+  opacity: 0.5;
+  
+
+
+}
+
+
+/* Below is css for the bootstrap page*/
+
+#bg{
+/*background: url("graphPaper.jpg");   */
+background-color:white;
+background-size: 100% 100%;
+background-repeat: no-repeat;
+background-attachment: fixed;
+position:-150px,-150px;
+opacity: 1;
+
+min-width:100%;
+min-height:100%;
+}
+
+p{
+font-family:"Indie Flower";
+font-size:30;
+margin: 0 60 60 10;
+}
+
+.navbar{
+  margin-bottom:0;
+  border-radius:0;
+}
+
+footer{
+  background-color: black;
+  color:gray;
+}
+
+.mainSection{
+  background-color:white;
+}
+
+.profilePic{
+  border-color: gray;
+  border-width: 5px;
+  border-style: solid;
+  border-radius:50%;
+  width:250px;
+  height:250px;
+}
+
+
+.odd{
+  margin:20 0 20 0;
+  padding: 10 0 10 0;
+}
+
+.even{
+  background-color:gray;
+  margin: 20 0 20 0;
+  padding: 10 0 10 0;
+}
+
+
+.social{
+margin:0;
+padding:0;
+}
+.social ul{
+margin:0;
+padding:5px;
+}
+
+.social ul li{
+margin:5px;
+list-style: none outside none;
+display: inline-block;
+}
