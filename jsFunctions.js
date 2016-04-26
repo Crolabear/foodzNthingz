@@ -1,4 +1,4 @@
-var drawGraph = function (fileName,xleng, yleng,idName,axisUse=false) {
+var drawGraph = function (fileName,s1,xleng, yleng,idName,axisUse=false) {
     // note idName is for where to append the canvas to
     d3.json(fileName,function(xdata) {
       // specify the width and length of canvas, and margin  
@@ -6,7 +6,7 @@ var drawGraph = function (fileName,xleng, yleng,idName,axisUse=false) {
       var h = yleng;
       var xaxisposition = yleng/5;
       var margin = {top:yleng/100,right:xleng/300,left:xleng/300,bottom:yleng/300};
-      var shrink=0.01;  // shrink b/c too tall, need to multiply by 0.01 to shrink it
+      var shrink=s1;  // shrink b/c too tall, need to multiply by 0.01 to shrink it
       
       
       
@@ -89,7 +89,7 @@ var drawGraph = function (fileName,xleng, yleng,idName,axisUse=false) {
         .attr("class","fig1")
         .attr("x",function(d) {return xs(d.word)})
         .attr("y",function(d) {return h-d.frequency*shrink-xaxisposition})
-        .attr("width",xs.rangeBand()-2)
+        .attr("width",xs.rangeBand())
         .attr("height",function(d) {return d.frequency*shrink})
         .attr("fill","steelblue")
         .on("mouseover",tip.show)

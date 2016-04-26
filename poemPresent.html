@@ -76,7 +76,7 @@
     <p id="plot1">
       The following histogram shows the count of the 50 most frequently used words.
       <script>	
-      	drawGraph("js4Hist.json",500,500,'#plot1',false);
+      	drawGraph("js4Hist.json",0.01,500,500,'#plot1',false);
       </script>
     </p>
     
@@ -86,7 +86,12 @@
       to talk about nature. 
     </p>
     
-    
+    <p id="plot2">
+      The next histogram displays the frequency of words that ends each sentence/line in a poem.
+      <script>
+      drawGraph("endWordCount.json",0.1,500,500,'#plot2',false);
+      </script> 
+    </p>
     <h3> <p>More to come ...</p> </h3>
     
   </div>
