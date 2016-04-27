@@ -11,6 +11,7 @@
   <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
   <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
   <script src="./jsFunctions.js"></script>
+  <script src="./d3.layout.cloud.js"> </script>
   
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
@@ -91,7 +92,23 @@
       <script>
       drawGraph("endWordCount.json",0.1,500,500,'#plot2',false);
       </script> 
+      
+      Some of those words were in the overall most frequent word list. Some are not: "poor",
+      "home","light","return" just to name a few.
     </p>
+    <p id="plot3">
+      Or a better way to visualize it... thanks to the wordcloud  d3 library by <a href="https://github.com/jasondavies/d3-cloud">Jason Davies</a> and
+      the <a href="http://bl.ocks.org/ericcoopey/6382449">wordCloud tutorial </a>.
+      The darker and smaller the words, the fewer times it occurs.
+      The fainter, and bigger the words, the more times that word occurs.
+      
+      <script>
+      genWordCloud('endWordCount.json',800,500,500,500,0.01,0.015,"#plot3");
+
+      </script>
+
+    </p>
+
     <h3> <p>More to come ...</p> </h3>
     
   </div>
