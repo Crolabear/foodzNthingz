@@ -1,0 +1,191 @@
+<head>
+</head>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src = 'http://code.jquery.com/jquery-1.11.0.min.js'></script>
+<meta charset="utf-8">
+
+
+<body>
+
+<h1> Haha. </h1>
+<p>  click the button to start </p>
+
+
+<p>
+    <button id = "start" type="button">start</button>
+    <button id = "reset" type="button">reset</button>
+  <label for="nRadius" 
+    style="display: inline-block; width: 240px; text-align: right">
+    Sections = <span id="nRadius-value">…</span>
+
+
+  </label>
+  <input type="range" min="2" max="20" id="nRadius">
+</p>
+<div id="graph1">
+
+</div>
+
+
+<script>
+
+var width = 500;
+var height = 500;    // height and width of the canvas
+//var curvePercent = [{"choice":1,"count":1}, {"choice":2,"count":1}, {"choice":3,"count":1}, {"choice":4,"count":1}];  // used in pie.layout.. feed the array in to compute the proportion...
+// Appending SVG to the body
+var svg = d3.select("#graph1").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+var makeCircle = function(width,height,curvePercent) {
+var twoPi = 2 * Math.PI;
+var formatPercent = d3.format(".0%");
+//var curvePercent = [.5,2,3,4];
+// Colours for curves
+var colours = d3.scale.category20();
+var colourValue = function(d, i) { return d; };
+
+var innerRad = width/8;
+var outerRad = width/6;
+
+// Arc for the pie char inside the paths
+var pieArc = d3.svg.arc()
+    .innerRadius(innerRad)
+    .outerRadius(outerRad);
+
+var centerX = width/3;    
+var centerY = height/3;
+
+// Pie char g (groups) container
+var pieChart = svg.append("g")
+    .attr("transform", "translate(" + centerX + "," + centerY + ")")
+    //.attr("width", width/2)  
+    //.attr("height", height/2);
+
+// Using pie layout to assigning values into pie chart format.
+var pieLayout = d3.layout.pie()
+    .value(function(d){ return d.count; });
+
+// Creating the g (group) container for the pie chart arc segments
+var pieGroup = pieChart.selectAll(".arcs")
+    .data(pieLayout(curvePercent))
+    .enter().append("g")
+    .attr("class", "arcs");
+  
+    // Appending the arc segment paths.
+pieGroup.append("path")
+  .attr("id", "start")
+  .attr("d", pieArc)
+  .attr("fill", function(d) { return colours(colourValue(d.data.choice));});
+
+}
+
+//makeCircle(width,height,curvePercent);
+
+
+// when the input range changes update the circle 
+d3.select("#nRadius").on("input", function() {
+  update(+this.value);
+});
+
+update(6);
+
+function update(nRadius) {
+
+  //adjust the text on the range slider
+  d3.select("#nRadius-value").text(nRadius);
+  d3.select("#nRadius").property("value", nRadius);
+  //console.log(nRadius);
+  //update the circle radius
+  curvePercent=[];
+  for (var i=0; i<nRadius; i++) {
+    //console.log({"choice":i,"count":1})
+    curvePercent.push({"choice":i,"count":1});
+    
+  }
+  
+  var width = 500;
+  var height = 500; 
+  makeCircle(width,height,curvePercent);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+var makeArr=function(width,height) {
+
+var centerX = width/3;    
+var centerY = height/3;
+var innerRad = width/8;
+var outerRad = width/6;
+
+var chairOriginX = centerX  + (outerRad * Math.sin(0));  // the location of the chair
+var chairOriginY = centerY - (outerRad * Math.cos(0));
+
+
+// create the chair object, which is a rectangle
+var chairWidth = 20;
+
+var M1 = chairOriginX - chairWidth/2,
+    M2 = chairOriginY-20,
+    L1 = chairOriginX + chairWidth/2,
+    L2 = chairOriginY-20,
+    L3 = chairOriginX,
+    L4 = chairOriginY;
+    
+var tri = svg.append("path")
+  .attr("id","arrow")
+  .attr("d","M "+M1+" "+M2+" "+"L "+L1+" "+L2+" "+"L "+L3+" "+L4+" "+"z")
+  .style("stroke-width", 2)
+  .style("stroke", "steelblue")
+  .style("fill", "purple");
+
+
+
+var revolveX =width/3;
+var revolveY = height/3;
+var degreeTurn = Math.random() * 360 + 720;
+
+
+var tween = function (d, i, a) {
+    return d3.interpolateString("rotate(0,+"+revolveX+","+revolveY+")", "rotate("+degreeTurn+","+revolveX+","+revolveY+")");
+}
+
+$(document).ready(function() {
+
+  $("#start").click(function(){
+    tri.transition().delay(20).duration(5000).attrTween("transform", tween);  
+  });
+  
+//   $("#reset").click(function(){
+//     d3.select("#arrow").remove();
+//     degreeTurn = Math.random() * 720;
+//   });
+});
+};
+
+var myArrow = makeArr(width,height);
+$("#reset").click(function(){
+  d3.select("#arrow").remove();
+  myArrow= makeArr(width,height);
+});
+
+
+
+
+</script>
+
+
+
+
+</body>    
