@@ -107,3 +107,16 @@ margin:5px;
 list-style: none outside none;
 display: inline-block;
 }
+
+
+.button {
+    /*background-color: #4CAF50;*/
+    border-radius: 12px;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

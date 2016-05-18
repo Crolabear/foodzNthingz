@@ -54,8 +54,8 @@
 
 
 <p>
-    <button id = "start" type="button">start</button>
-    <button id = "reset" type="button">reset</button>
+    <button class="button" id = "start" border-radius =12px font-size=12px type="button">start</button>
+    <button class="button" id = "reset" border-radius =12px font-size=12px type="button">reset</button>
 </p>
 <p>    
   <label for="nRadius" 
@@ -71,8 +71,8 @@
 
 <script>
 
-var width = 600;
-var height = 600;    // height and width of the canvas
+var width = $(window).width()*0.5;
+var height = $(window).height()*0.5;    // height and width of the canvas
 //var curvePercent = [{"choice":1,"count":1}, {"choice":2,"count":1}, {"choice":3,"count":1}, {"choice":4,"count":1}];  // used in pie.layout.. feed the array in to compute the proportion...
 // Appending SVG to the body
 var svg = d3.select("#plot1").append("svg")
@@ -96,8 +96,8 @@ var pieArc = d3.svg.arc()
     .innerRadius(innerRad)
     .outerRadius(outerRad);
 
-var centerX = width/3;    
-var centerY = height/3;
+var centerX = width/2;    
+var centerY = height/2;
 
 // Pie char g (groups) container
 var pieChart = svg.append("g")
@@ -147,8 +147,8 @@ function update(nRadius) {
     
   }
 //   
-   var width = 600;
-   var height = 600; 
+   var width = $(window).width()*0.5;
+   var height = $(window).height()*0.5; 
   makeCircle(width,height,curvePercent);
 }
 
@@ -156,8 +156,8 @@ function update(nRadius) {
 
 var makeArr=function(width,height) {
 
-var centerX = width/3;    
-var centerY = height/3;
+var centerX = width/2;    
+var centerY = height/2;
 var innerRad = width/8;
 var outerRad = width/6;
 
@@ -184,8 +184,8 @@ var tri = svg.append("path")
 
 
 
-var revolveX =width/3;
-var revolveY = height/3;
+var revolveX =width/2;
+var revolveY = height/2;
 var degreeTurn = Math.random() * 360 + 720;
 
 
