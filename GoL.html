@@ -1,0 +1,184 @@
+<head>
+</head>
+<body>
+Hello World
+<script src=http://d3js.org/d3.v3.min.js></script>
+
+<script>
+
+
+// this is how we initialize the grids
+var xCell = 150;
+var yCell = 100;
+var cellWidth = 5;
+var cellHeight = 5;
+var delay = 100 // looks like we can use d3 timer to change this.
+
+// this is how we create the lines
+var xs = d3.scale.linear().domain([0,xCell]).range([0,xCell*cellWidth]);
+var ys = d3.scale.linear().domain([0,yCell]).range([0,yCell*cellHeight]);
+
+// this is how to create a new array
+var states = new Array();
+
+
+//next we loop through the x and y to fill in the array.
+d3.range(xCell).forEach(function(x) {  // for each, inside it, u create a function
+  states[x] = new Array()
+  d3.range(yCell).forEach(function(y) {
+    states[x][y] = Math.random() > 0.7 ? true:false
+  })
+})
+
+//we fill the cells probability 0.7
+
+
+
+// define a function to convert the grid to a json format so we can bind the data easier.
+function toGrid(states) {
+  var g=[]
+  for (x=0;x<xCell;x++){
+    for (y=0;y<yCell;y++) {
+      g.push({"x":x,"y":y,"state":states[x][y]})
+    }
+  }
+  return g   // and we use push to update the empty list??
+}
+
+
+var visualization = d3.select("body")
+  .append("svg:svg")
+  .attr("class","graph")
+  .attr("width",window.width)
+  .attr("height",window.height)
+  
+  
+visualization.selectAll("rect")
+  .data(function() {return toGrid(states)}) // not sure what does this do
+  .enter()
+  .append("svg:rect")
+  .attr("stroke","none")
+  .attr("fill",function(d) {return d.state ? "green":"white"})
+  .attr("x",function(d) {return xs(d.x)})
+  .attr("y",function(d) {return ys(d.y)})
+  .attr("width",cellWidth)
+  .attr("height",cellHeight)  
+
+  
+// now a function to update each cell
+function createNewGen() {
+  var nextGen = new Array()
+  for (x=0;x<xCell;x++) {
+    nextGen[x] = new Array()
+    for(y=0;y<yCell;y++) {
+      var topI = y-1 <0 ? yCell-1:y-1
+      var rightI = x+1 == xCell ? 0:x+1
+      var bottomI = y+1==yCell ? 0:y+1
+      var leftI = x-1<0 ? xCell-1:x-1
+      
+      var thisState = states[x][y] // the current state
+      var liveN = 0
+      liveN += states[leftI][topI] ? 1:0
+      liveN += states[leftI][bottomI] ? 1:0  
+      liveN += states[leftI][y] ? 1:0
+      liveN += states[rightI][topI] ? 1:0
+      liveN += states[rightI][bottomI] ? 1:0
+      liveN += states[rightI][y] ? 1:0
+      liveN += states[x][bottomI] ? 1:0
+      liveN += states[x][topI] ? 1:0  
+      
+      var newState = false
+      if (thisState) {
+        newState = liveN == 2 || liveN ==3 ? true:false
+      } 
+      else {
+        newState = liveN ==3 ? true:false
+      }
+      
+      nextGen[x][y] = newState
+    }
+  }
+  
+  return nextGen
+}  
+
+
+// faster.... b/c i didn't load in the newColor.csv. instead i used random color.
+function animate() {
+  var color1 = d3.rgb(Math.floor(Math.random() * 255),Math.floor(Math.random() * 255),Math.floor(Math.random() * 255))
+  states = createNewGen()
+  d3.selectAll("rect")
+    .data(toGrid(states))
+    .transition()
+    .attr("fill",function(d) {return d.state ? color1:"white"})
+    .delay(delay)
+    .duration(0)
+  
+}
+// 
+// 
+// //this method is slower b/c each time animate runs, the newColorcsv is loaded.
+setInterval("animate()",delay)
+
+
+
+// function animate() {
+//   d3.csv("newColor.csv", function(data) {
+//   index1 = Math.floor(Math.random() * 4000)
+//   var color1 = d3.rgb(data[index1].r, data[index1].g, data[index1].b);
+//   states = createNewGen()
+//   d3.selectAll("rect")
+//     .data(toGrid(states))
+//     .transition()
+//     .attr("fill",function(d) {return d.state ? color1:"white"})
+//     .delay(delay)
+//     .duration(0)
+//     
+//     })
+//   
+// }
+// 
+// 
+// //this method is slower b/c each time animate runs, the newColorcsv is loaded.
+// setInterval("animate()",delay)
+// 
+
+
+// this method needs some work . but it's faster. need d3.timer probably
+
+// function animate1() {
+//   d3.csv("newColor.csv", function(data) {
+//   index1 = Math.floor(Math.random() * 4000)
+//   var color1 = d3.rgb(data[index1].r, data[index1].g, data[index1].b);
+//   states = createNewGen()
+//   d3.selectAll("rect")
+//     .data(toGrid(states))
+//     .transition()
+//     .attr("fill",function(d) {return d.state ? color1:"white"})
+//     .delay(delay)
+//     .duration(0)
+//     
+//     })
+//   
+// }
+// d3.csv("newColor.csv", function(data) {
+//   index1 = Math.floor(Math.random() * 4000)
+//   var i = 0;
+//   while (i < 1000) {
+//     var color1 = d3.rgb(data[index1].r, data[index1].g, data[index1].b)
+//     window.setTimeout(animate1(color1), 50)
+//     
+//     i++;
+//   }
+// });
+
+</script>
+
+
+</body>
+
+
+
+
+
+
