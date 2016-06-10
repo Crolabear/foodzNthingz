@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +69,6 @@
 
 
 <script>
-
 var width = $(window).width()*0.5;
 var height = $(window).height()*0.5;    // height and width of the canvas
 //var curvePercent = [{"choice":1,"count":1}, {"choice":2,"count":1}, {"choice":3,"count":1}, {"choice":4,"count":1}];  // used in pie.layout.. feed the array in to compute the proportion...
@@ -78,8 +76,6 @@ var height = $(window).height()*0.5;    // height and width of the canvas
 var svg = d3.select("#plot1").append("svg")
     .attr("width", width)
     .attr("height", height);
-
-
 var makeCircle = function(width,height,curvePercent) {
 var twoPi = 2 * Math.PI;
 var formatPercent = d3.format(".0%");
@@ -87,28 +83,22 @@ var formatPercent = d3.format(".0%");
 // Colours for curves
 var colours = d3.scale.category20();
 var colourValue = function(d, i) { return d; };
-
 var innerRad = width/8;
 var outerRad = width/6;
-
 // Arc for the pie char inside the paths
 var pieArc = d3.svg.arc()
     .innerRadius(innerRad)
     .outerRadius(outerRad);
-
 var centerX = width/2;    
 var centerY = height/2;
-
 // Pie char g (groups) container
 var pieChart = svg.append("g")
     .attr("transform", "translate(" + centerX + "," + centerY + ")")
     //.attr("width", width/2)  
     //.attr("height", height/2);
-
 // Using pie layout to assigning values into pie chart format.
 var pieLayout = d3.layout.pie()
     .value(function(d){ return d.count; });
-
 // Creating the g (group) container for the pie chart arc segments
 var pieGroup = pieChart.selectAll(".arcs")
     .data(pieLayout(curvePercent))
@@ -120,21 +110,14 @@ pieGroup.append("path")
   .attr("id", "start")
   .attr("d", pieArc)
   .attr("fill", function(d) { return colours(colourValue(d.data.choice));});
-
 }
-
 //makeCircle(width,height,curvePercent);
-
-
 // when the input range changes update the circle 
 d3.select("#nRadius").on("input", function() {
   update(+this.value);
 });
-
 update(3);
-
 function update(nRadius) {
-
   //adjust the text on the range slider
   d3.select("#nRadius-value").text(nRadius);
   d3.select("#nRadius").property("value", nRadius);
@@ -151,23 +134,15 @@ function update(nRadius) {
    var height = $(window).height()*0.5; 
   makeCircle(width,height,curvePercent);
 }
-
-
-
 var makeArr=function(width,height) {
-
 var centerX = width/2;    
 var centerY = height/2;
 var innerRad = width/8;
 var outerRad = width/6;
-
 var chairOriginX = centerX  + (outerRad * Math.sin(0));  // the location of the chair
 var chairOriginY = centerY - (outerRad * Math.cos(0));
-
-
 // create the chair object, which is a rectangle
 var chairWidth = 20;
-
 var M1 = chairOriginX - chairWidth/2,
     M2 = chairOriginY-20,
     L1 = chairOriginX + chairWidth/2,
@@ -181,20 +156,13 @@ var tri = svg.append("path")
   .style("stroke-width", 2)
   .style("stroke", "steelblue")
   .style("fill", "purple");
-
-
-
 var revolveX =width/2;
 var revolveY = height/2;
 var degreeTurn = Math.random() * 360 + 720;
-
-
 var tween = function (d, i, a) {
     return d3.interpolateString("rotate(0,+"+revolveX+","+revolveY+")", "rotate("+degreeTurn+","+revolveX+","+revolveY+")");
 }
-
 $(document).ready(function() {
-
   $("#start").click(function(){
     tri.transition().delay(20).duration(5000).attrTween("transform", tween);  
   });
@@ -205,14 +173,11 @@ $(document).ready(function() {
 //   });
 });
 };
-
 var myArrow = makeArr(width,height);
 $("#reset").click(function(){
   d3.select("#arrow").remove();
   myArrow= makeArr(width,height);
 });
-
-
 </script>
   
   
