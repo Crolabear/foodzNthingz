@@ -1,0 +1,20 @@
+
+Power curve simulation...
+
+We want to look at type 1 and type 2 error.
+H0 : the distribution is Normal with mean 0 and variance 1.
+H1 : the distribution is Normal with mean k and variance 1.
+
+
+We will generate 1000 samples from the distribution specified by H1. Each sample consists of 20 draws from Normal(k,1).
+For each sample, we will compute its mean, resulting in a distribution of sample means (roughly normal with mean k, and variance 1/20).
+
+
+To compute the power of the test at each significance level, alpha, we will loop through a range of values for alpha, compute how far away the mean of each sample i is from 0.
+If we obtain a test statistics, z_i, that corresponds to a probability > alpha, we fail to reject H0.
+If we obtain a test statistics that corresponds to a probability < alpha, we will reject H0.
+
+
+
+
+ 
