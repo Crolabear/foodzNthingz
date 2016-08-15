@@ -1,0 +1,52 @@
+Note to self 2:
+
+Recently made an SQL powered d3js visualization using a data set from the social security administration: https://www.ssa.gov/oact/babynames/limits.html
+following this guide: http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
+
+Difficulties and solutions
+The guide provides step by step illustration on how to set up flask on EC2, and explains what each block of code does.
+When it comes to the actually implementing the SQL powered plots, I ran into 
+
+1. File structures. Where to put each file so that flask can access the HTML, CSS and JS files.
+my solution: when I want to use flask to call external HTML pages, I need to create a folder and name it templates.
+then I can make use of the flask function: render_template to load the external HTML pages inside the templates folder.
+For CSS and JS files, I need to put them in a folder call static. Then I can include a script in the HTML file to call the JS and CSS files inside the static folder.
+The script to include is:  
+<link rel="stylesheet" type = "text/css" href="{{url_for('static',filename='CSS_file.cscs')}}"></script> for CSS
+and 
+<script type="text/javascript" src="{{ url_for('static', filename='JS_file.js')}}"></script> for JS.
+
+2. SQL db creation. I parsed all the data point and add each entry to sqlite using python. The tutorial uses pandas to create sql db 
+
+3. Axis, and histogram update. Using update pattern. Unlike the static visualization, this chart will update each time you change the selection.
+Each time the selection changed, a function update url is called and the url will be passed as an url query to obtain the info needed for the visual.
+Therefore, I need a way to update the visual so that we dont have the situation that new graphs are generated on top of old graphs.
+
+4. creating drop down menu for US states and years.
+use js to create html elements:
+
+<select id="us_state" onchange="update_url()">  // create the selecte element we append the drop down menu to.
+<script>
+// specify the location of the text file. It's a file of US states abbreviations.
+var file = "./../static/stateName.txt"
+$(document).ready(function() {
+    //fetch text file
+    $.get(file, function(data) {
+        //split on new lines
+        var lines = data.split('\n');
+        var dropdown = ""
+        //iterate over lines of file and create a option element
+        for(var i=0;i<lines.length;i++) {
+            //create option
+            var text1= lines[i].replace(".TXT",'');
+            dropdown += '<option value="' + text1 + '">' + text1 + '</option>';
+        }
+        
+        // append the dropdown string under the element with ID = us_state
+        document.getElementById("us_state").innerHTML = dropdown;
+    });
+});
+
+
+
+
