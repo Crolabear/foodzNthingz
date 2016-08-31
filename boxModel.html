@@ -1,0 +1,137 @@
+<html>
+
+
+<body>
+
+<p>
+
+<label for="findValue" style="display: inline-block; width:200px; text-align:right">
+choose the type of data we are working with: 
+</label>
+
+<select id="findValue" onchange="update_url()">
+<option> Sum </option>
+<option> Average </option>
+<option> Count </option>
+<option> Percent </option>
+</select>
+
+</p>
+
+<p>
+<label for="typeTest" style="display: inline-block; width:200px; text-align:right">
+choose the type of the test: 
+</label>
+
+<select id="typeTest" onchange="update_url()">
+<option> less than </option>
+<option> bigger than </option>
+<option> not equal to </option>
+</select>
+</p>
+
+
+<p>
+Enter the Number of draws: <input id="draw1" type="number" value="10">
+</br>
+Enter the observed value: <input type="number" id="observedData" value="0">
+</br>
+Enter the SD of the box: <input id="observedSD" type="number" value="1">
+</br>
+Enter the value for the null hypothesis: <input id="nullHypo" type="number" value="0">
+</br>
+
+<button onclick="update_url()">Update</button>
+</p>
+
+
+<p id="displayBox">
+update the box parameters to generate null and alternative hypothesis.
+</p>
+
+<p>
+<script>
+
+function findNormal(tscore){
+    var cutoff = (tscore*1 + 5)*100000/10
+    summation = 0
+    for (var i=0; i<cutoff;i++){
+            xvalue = 10/100000 * i - 5
+            density = 1/Math.sqrt(2*Math.PI) * 1/(Math.exp(xvalue*xvalue/2))
+            summation = summation + density*10/100000
+    }
+    return (1-summation).toFixed(4) ;
+}
+
+
+function update_url() {
+//     var type=document.getElementById("typeBox").value
+    var goal = document.getElementById("findValue").value
+    var test = document.getElementById("typeTest").value
+//     var SDtype= document.getElementById("SDbox").value
+    var SDvalue = document.getElementById("observedSD").value
+    var observedValue = document.getElementById("observedData").value
+    var nullHypo = document.getElementById("nullHypo").value
+    var draw1 = document.getElementById("draw1").value
+    
+    var data1 = {"goal":goal, "test":test, "SDvalue":SDvalue, "observedValue":observedValue,"nullHypo":nullHypo}
+    //console.log(data1)
+    
+    var displayB = document.getElementById("displayBox");
+    
+    var nullStr='<p>null Hypothesis: the '+goal+' of the box is '+nullHypo+ ', with an SD of '+SDvalue+' </p>'
+    var altStr = '<p>alternative Hypothesis: the '+goal+' of the box is '+test+' '+nullHypo+', with an SD of '+SDvalue+' </p>'
+    
+    
+    
+    
+    var t_score = 0;
+    var se=1;
+    
+    if (goal == "Sum"){
+        se = Math.sqrt(draw1) * SDvalue;}
+    else if(goal == "Average"){
+        se = Math.sqrt(draw1) * SDvalue/draw1;}
+    else if(goal == "Count"){
+        se = Math.sqrt(draw1) * SDvalue;}
+    else{
+        se = Math.sqrt(draw1) * SDvalue/draw1;
+    }
+    
+    console.log(se);
+
+    var z = 0;
+    var prob = 0.5;
+    if (test == "less than") {
+        z=(observedValue-nullHypo)/se
+        prob = findNormal(z);
+    } else if( test == "bigger than") {
+        z = (nullHypo-observedValue)/se
+        prob = findNormal(z);
+    } else {
+        z = Math.abs(observedValue-nullHypo)/se
+        prob = 2*findNormal(z);
+    }
+    
+    
+    var resultStr = '<p> The z score is '+z+'. </p>'
+    var probStr = '<p>Assuming the null hypothesis is correct, the probability of obtaining a sample as extreme or even more extreme than the one observed is less than or equals to '+prob+'. </p>'
+    displayB.innerHTML = nullStr+altStr+resultStr+probStr;
+    
+    
+    
+    return data1;
+}
+
+// data2 = update_url();
+// console.log(data2);
+</script>
+
+
+</p>
+
+
+
+</body>
+
+</html>
