@@ -46,8 +46,23 @@
 </nav>
 
 <h2>
-<p align="center">Box model. </h2>
+<p align="center">Box model for hypothesis test. </p>
 </h2>
+
+
+<h3> <p>Example</p> </h3>
+<p align="center">
+A company claims that a raisin cereal contains at least 100 raisins. An inspector from the FTC 
+takes a random sample of 121 boxes of cereals and finds that the sample mean is 96 raisins. Let's assume
+the standard deviation for number of raisins is 10. Formulate a z test and find its z value.    --problem provided by steve Chow. 
+</p>
+
+<p align="center"> 
+We can model this problem as draws from a box.
+The content of the box: integers representing the number of raisins in each cereal, with standard deviation = 10.
+Number of draws from the box = 121.
+Using these info, obtained the values as follow: 
+</p>
 
 <p align="center">
 
@@ -56,8 +71,8 @@
 </label>
 
 <select id="findValue" onchange="update_url()">
-<option> Sum </option>
 <option> Average </option>
+<option> Sum </option>
 <option> Count </option>
 <option> Percent </option>
 </select>
@@ -70,27 +85,27 @@
 </label>
 
 <select id="typeTest" onchange="update_url()">
-<option> less than </option>
 <option> bigger than </option>
+<option> less than </option>
 <option> not equal to </option>
 </select>
 </p>
 
 
 <p align="center">
-    Enter the Number of draws: <input id="draw1" type="number" value="10">
+    Enter the Number of draws: <input id="draw1" type="number" value="121">
 </p>
 
 <p align="center">
-    Enter the observed value: <input type="number" id="observedData" value="0">
+    Enter the observed value: <input type="number" id="observedData" value="96">
 </p>
 
 <p align="center">
-    Enter the SD of the box: <input id="observedSD" type="number" value="1">
+    Enter the SD of the box: <input id="observedSD" type="number" value="10">
 </p>
 
 <p align="center">
-    Enter the value for the null hypothesis: <input id="nullHypo" type="number" value="0">
+    Enter the value for the null hypothesis: <input id="nullHypo" type="number" value="100">
 </p>
 
 <p align="center">
